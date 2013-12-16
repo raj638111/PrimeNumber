@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <string name="app_name">PrimeLive</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="heading">Find first \'N\' Prime Number</string>
+	<string name="past_result">Results : </string>
+	<string name="clear_button">Clear History</string>
+	<string name="hint">Enter Number here</string>
+</resources>

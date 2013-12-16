@@ -1,0 +1,105 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+	android:background="#ffffffff"    
+    tools:context=".MainActivity" >
+
+    <!-- <TextView
+        android:id="@+id/headingId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textColor="#6b4423"
+        android:text="@string/heading" 
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold"/> -->
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_marginBottom="5dp"
+        android:hint="@string/hint" >
+        
+        <requestFocus />
+ 
+         </EditText>
+    
+    <!--  android:layout_below="@+id/headingId"  -->
+        
+    
+    <TextView
+        android:id="@+id/pastResultId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/past_result" 
+        android:gravity="left"
+        android:layout_below="@+id/editText"
+        android:layout_margin="5dp"
+        android:textColor="#ff000000"
+        android:textStyle="bold"/>
+    
+    <TextView
+        android:id="@+id/collpaseButtonId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Collapse"
+        android:background="#86E9F4"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toLeftOf="@+id/sortId"
+        android:layout_below="@+id/editText"
+        android:textColor="#ff000000"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        />
+   
+     <TextView
+        android:id="@+id/sortId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Sort Nos" 
+        android:layout_below="@+id/editText"
+        android:layout_alignRight="@+id/editText"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="#ff000000"
+        android:background="#86E9F4"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"/>
+   <!--  
+        android:layout_toRightOf="@+id/pastResultId"
+        android:layout_alignRight="@+id/headingId"
+         -->
+    
+    <ExpandableListView
+        android:id="@+id/expandableView" 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/pastResultId"
+        android:layout_margin="5dp"
+        android:background="#ffcccccc"
+        android:cacheColorHint="#00000000"
+        />
+    
+   <!--   <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/pastResultId"
+        android:layout_margin="5dp"
+        android:background="#ffcccccc"/> -->
+    
+</RelativeLayout>

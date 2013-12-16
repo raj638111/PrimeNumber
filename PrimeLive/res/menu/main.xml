@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:PrimeLive="http://schemas.android.com/apk/res-auto" >
+
+ 	  
+    <item  	android:id="@+id/item1"  
+        	android:title="Reset"
+        	PrimeLive:showAsAction="never"/>  
+  
+    <!-- <item  	android:id="@+id/item2"  
+        	android:title="Start Service"/>   -->
+     
+    <item  android:id="@+id/item3"  
+        	android:title="Stop Calculation"
+        	PrimeLive:showAsAction="never"/>  
+    
+</menu>
+
+
+<!-- 
+PrimeLive:showAsAction="always" -->
+        	
