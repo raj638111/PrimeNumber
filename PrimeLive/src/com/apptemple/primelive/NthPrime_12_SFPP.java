@@ -1,6 +1,5 @@
 package com.apptemple.primelive;
 
-import android.util.Log;
 
 public class NthPrime_12_SFPP {
 	// We only test candidates in int range, so these bases are sufficient

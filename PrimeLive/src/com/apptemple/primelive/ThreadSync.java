@@ -124,6 +124,7 @@ public class ThreadSync {
 			//Log.i("PRIME", "ThreadSync : Starting new thread...");
 			Runnable runnable = new ServiceThread(threadPipe, this, mService);
 			Thread thread = new Thread(runnable);
+			//thread.setPriority(Thread.MAX_PRIORITY);
 			thread.start();
 			//Log.i("PRIME", "ThreadSync : New thread started");
 						
@@ -179,7 +180,6 @@ public class ThreadSync {
 		
 
 	private synchronized Task getTaskFromTaskList(int threadNo) {
-		RequestType requestType = RequestType.NONE;
 		Task subTask = null;
 		
 		//----- Check for task in mTaskList ----------
@@ -217,7 +217,7 @@ public class ThreadSync {
 			//Log.v("PRIME", "ThreadSync : " + threadNo + " : Starting thread : " + threadPipe.getThreadNo());
 			Runnable runnable = new ServiceThread(threadPipe, ThreadSync.this, mService);
 			Thread thread = new Thread(runnable);
-			
+			//thread.setPriority(Thread.MAX_PRIORITY);
 			thread.start();	
 			Log.d("PRIME", "ThreadSync : " + threadNo + " : Thread Started : " + threadPipe.getThreadNo());
 			

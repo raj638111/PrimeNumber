@@ -191,7 +191,7 @@ public class DbHandler extends SQLiteOpenHelper {
 		 }
 		 db.close();
 		 
-		 //Log.i("PRIME", "Table : getPrimeList() : primeList.size() -> " + primeList.size());
+		 Log.v("PRIME", "Table : getPrimeList() : primeList.size() -> " + primeList.size());
 		 
 		return primeList; 
 	 }

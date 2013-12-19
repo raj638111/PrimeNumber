@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
@@ -32,6 +35,13 @@ public class ServiceThread implements Runnable {
 		int primeNo = 0;
 		ArrayList<PrimeNo> primeList;
 		int threadNo = mThreadPipe.getThreadNo(); //NN
+		
+		//setPriority(Thread.MAX_PRIORITY);
+		PowerManager mgr = (PowerManager)mService.getSystemService(Context.POWER_SERVICE);
+		WakeLock wakeLock = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyWakeLock");
+		//wakeLock.setReferenceCounted(false);
+		wakeLock.acquire();
+		
 		
 		for(;;) {
 			
@@ -135,7 +145,7 @@ public class ServiceThread implements Runnable {
 						
 						//mThreadPipe.print();
 						if(task.isTaskComplete() == true) {
-							Log.d("PRIME", "ServiceThread : Thread " + threadNo 
+							Log.w("PRIME", "ServiceThread : Thread " + threadNo 
 									+ " : Workunit completion : start -> " + task.startAt() 
 									+ ", MaxNo -> " + task.getMaxNo());
 						
@@ -150,7 +160,7 @@ public class ServiceThread implements Runnable {
 						
 						primeNo = NthPrime_12_SFPP.nthPrime(nthNo, mThreadPipe);
 						if(primeNo == 0) {
-							Log.d("PRIME", "ServiceThread : Priority nofication received." 
+							Log.w("PRIME", "ServiceThread : Priority nofication received." 
 												+ "Aborting current Task TEMPORARILY : " 
 												+ "current no -> " + nthNo 
 												+ "Max No -> " + task.getMaxNo() 
@@ -159,6 +169,7 @@ public class ServiceThread implements Runnable {
 						}else {
 							//Log.v("PRIME", "ServiceThread : Prime no calculated : nth -> " 
 							//						+ nthNo + ", Prime No -> " + primeNo);
+							
 							mDbHandler.insertPrimeNo(nthNo, primeNo);
 							task.setWorkUnitCompletion();
 						}
@@ -170,10 +181,13 @@ public class ServiceThread implements Runnable {
 						long diff = curTime.getTime() - prevTime.getTime();
 						long seconds = diff / 1000 % 60;
 						if(seconds > 5) {
-							mState.addPrimeResult(primeList);
-							intent = new Intent(Constants.SU_PRIME);
 							//Log.v("PRIME", "ServiceThread : Thread " + threadNo 
-							//		+ " : Sending Broadcast-1 : SU_PRIME");
+							//		+ " : Sending Broadcast-1 : Before : SU_PRIME : No -> " + nthNo);
+							mState.addPrimeResult(primeList);
+							//Log.v("PRIME", "ServiceThread : Thread " + threadNo 
+							//		+ " : Sending Broadcast-1 : After : SU_PRIME : No -> " + nthNo);
+							
+							intent = new Intent(Constants.SU_PRIME);
 							LocalBroadcastManager.getInstance(mService.getApplicationContext())
 				    								 .sendBroadcast(intent);
 							primeList.clear();	
@@ -187,7 +201,7 @@ public class ServiceThread implements Runnable {
 						primeList.clear();
 						intent = new Intent(Constants.SU_PRIME);
 						//Log.v("PRIME", "ServiceThread : Thread " + threadNo 
-						//		+ " : Sending Broadcast-2 : SU_PRIME");
+						//	+ " : Sending Broadcast-2 : SU_PRIME : No -> ");
 						
 			    		LocalBroadcastManager.getInstance(mService.getApplicationContext())
 			    								 .sendBroadcast(intent);
@@ -209,6 +223,7 @@ public class ServiceThread implements Runnable {
 			
 		}
 		
+		wakeLock.release();
 	}
 	
 }
